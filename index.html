@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
+<title>富丘まごころ内科クリニック - 院内サイネージ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap');
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+    background: #0a1628;
+    color: #2d3748;
+  }
+
+  /* ===== Slideshow Container ===== */
+  .slideshow {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ===== Common Layout ===== */
+  .slide-inner {
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== Progress Bar ===== */
+  .progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    z-index: 1000;
+    transition: width linear;
+  }
+
+  /* ===== Slide Navigation Dots ===== */
+  .nav-dots {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 1000;
+  }
+
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+  }
+
+  .nav-dot.active {
+    background: #ffffff;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  }
+
+  /* ===== Background Styles ===== */
+  .bg-hero {
+    background: linear-gradient(135deg, #0f4c75 0%, #1b6ca8 30%, #3282b8 60%, #5aadcc 100%);
+  }
+
+  .bg-features {
+    background: linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 40%, #bae6fd 100%);
+  }
+
+  .bg-doctor {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 40%, #3a7ab5 100%);
+  }
+
+  .bg-gastro {
+    background: linear-gradient(160deg, #fff7ed 0%, #ffedd5 40%, #fed7aa 100%);
+  }
+
+  .bg-colon {
+    background: linear-gradient(160deg, #f0fdf4 0%, #dcfce7 40%, #bbf7d0 100%);
+  }
+
+  .bg-access {
+    background: linear-gradient(135deg, #1a365d 0%, #234e80 30%, #2d6aa0 60%, #3a85c0 100%);
+  }
+
+  /* ===== Slide 1: Hero ===== */
+  .slide-hero .slide-inner {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 40px;
+    padding: 12px 36px;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease 0.3s both;
+  }
+
+  .hero-clinic-name {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease 0.5s both;
+  }
+
+  .hero-group-name {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 50px;
+    animation: fadeInUp 1s ease 0.7s both;
+  }
+
+  .hero-main-message {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 1200px;
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease 0.9s both;
+  }
+
+  .hero-features {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeInUp 1s ease 1.1s both;
+  }
+
+  .hero-feature-tag {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .hero-new-badge {
+    position: absolute;
+    top: 50px;
+    right: 80px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .hero-new-badge .year {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .hero-new-badge .month {
+    font-size: 28px;
+    line-height: 1.1;
+  }
+
+  .hero-new-badge .label {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== Slide 2: Features ===== */
+  .slide-features .slide-inner {
+    padding: 60px 100px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-label {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #3b82f6;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 44px;
+    font-weight: 800;
+    color: #1e3a5f;
+    margin-bottom: 12px;
+  }
+
+  .section-subtitle {
+    font-size: 20px;
+    color: #64748b;
+    font-weight: 400;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    flex: 1;
+    align-content: center;
+  }
+
+  .feature-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px 44px;
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(59, 130, 246, 0.08);
+    transition: transform 0.3s ease;
+  }
+
+  .feature-number {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  .feature-number.fn-1 { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .feature-number.fn-2 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+  .feature-number.fn-3 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+  .feature-number.fn-4 { background: linear-gradient(135deg, #10b981, #059669); }
+
+  .feature-text h3 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 8px;
+  }
+
+  .feature-text p {
+    font-size: 18px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  /* ===== Slide 3: Doctor ===== */
+  .slide-doctor .slide-inner {
+    flex-direction: row;
+    padding: 60px 80px;
+    color: #ffffff;
+    gap: 60px;
+  }
+
+  .doctor-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .doctor-label {
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 16px;
+  }
+
+  .doctor-name {
+    font-size: 52px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .doctor-credential {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .doctor-message {
+    font-size: 22px;
+    line-height: 2;
+    font-weight: 400;
+  }
+
+  .doctor-message .highlight {
+    color: #7dd3fc;
+    font-weight: 600;
+  }
+
+  .doctor-right {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .career-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 28px;
+  }
+
+  .career-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .career-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .career-year {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: #7dd3fc;
+    min-width: 130px;
+    font-size: 17px;
+  }
+
+  .career-desc {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .doctor-cta {
+    margin-top: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 20px 28px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* ===== Slide 4 & 5: Symptoms ===== */
+  .slide-symptoms .slide-inner {
+    padding: 50px 80px;
+  }
+
+  .symptoms-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .symptoms-header .icon-label {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .symptoms-header h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .symptoms-header .lead {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .gastro-color .icon-label { color: #ea580c; }
+  .gastro-color h2 { color: #9a3412; }
+  .gastro-color .lead { color: #78716c; }
+
+  .colon-color .icon-label { color: #16a34a; }
+  .colon-color h2 { color: #166534; }
+  .colon-color .lead { color: #64748b; }
+
+  .symptoms-grid {
+    display: grid;
+    gap: 14px 32px;
+    flex: 1;
+    align-content: center;
+  }
+
+  .symptoms-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .symptom-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .symptom-item .check {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .gastro-check { background: linear-gradient(135deg, #f97316, #ea580c); }
+  .colon-check { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+  .symptoms-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .gastro-footer {
+    background: rgba(234, 88, 12, 0.08);
+    color: #c2410c;
+  }
+
+  .colon-footer {
+    background: rgba(22, 163, 74, 0.08);
+    color: #15803d;
+  }
+
+  /* ===== Slide 6: Access ===== */
+  .slide-access .slide-inner {
+    flex-direction: row;
+    color: #ffffff;
+    padding: 60px 80px;
+    gap: 60px;
+  }
+
+  .access-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .access-label {
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 16px;
+  }
+
+  .access-clinic-name {
+    font-size: 44px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .access-group {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 48px;
+  }
+
+  .access-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .access-info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .access-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  .access-info-item .info-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .access-info-item .info-value {
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  .access-info-item .info-sub {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2px;
+  }
+
+  .access-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .map-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 24px;
+  }
+
+  /* ===== Animations ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* ===== Clinic Logo / Header Bar ===== */
+  .header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6);
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div class="slideshow" id="slideshow">
+
+  <!-- ===== Slide 1: Hero / Introduction ===== -->
+  <div class="slide bg-hero slide-hero active" data-duration="12000">
+    <div class="hero-new-badge">
+      <span class="year">2026年</span>
+      <span class="month">1月〜</span>
+      <span class="label">新体制</span>
+    </div>
+    <div class="slide-inner">
+      <div class="hero-badge">安心の内視鏡検査クリニック</div>
+      <div class="hero-clinic-name">富丘まごころ内科クリニック</div>
+      <div class="hero-group-name">KUNIMOTO MEDICAL GROUP</div>
+      <div class="hero-main-message">
+        内視鏡専門医による、鎮静剤を用いた<br>
+        負担の少ない内視鏡検査・治療を提供しております
+      </div>
+      <div class="hero-features">
+        <div class="hero-feature-tag">内視鏡専門医が担当</div>
+        <div class="hero-feature-tag">鎮静剤を用いた検査</div>
+        <div class="hero-feature-tag">胃・大腸 同日検査対応</div>
+        <div class="hero-feature-tag">日帰りポリープ切除</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slide 2: 4 Features ===== -->
+  <div class="slide bg-features slide-features" data-duration="12000">
+    <div class="header-bar"></div>
+    <div class="slide-inner">
+      <div class="section-header">
+        <div class="section-label">Our Features</div>
+        <div class="section-title">当院の内視鏡検査「4つの特徴」</div>
+        <div class="section-subtitle">患者様に寄り添った負担の少ない検査を実施しています</div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-number fn-1">1</div>
+          <div class="feature-text">
+            <h3>内視鏡専門医による的確な検査</h3>
+            <p>豊富な実績を持つ専門医が、確かな技術で検査を行います</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number fn-2">2</div>
+          <div class="feature-text">
+            <h3>鎮静剤を用いた負担の少ない検査</h3>
+            <p>眠っているような状態で検査を受けることができます</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number fn-3">3</div>
+          <div class="feature-text">
+            <h3>経鼻内視鏡・大腸ポリープ切除に対応</h3>
+            <p>幅広い検査・治療に院内で対応可能です</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number fn-4">4</div>
+          <div class="feature-text">
+            <h3>最先端の内視鏡機器を導入</h3>
+            <p>専門施設と同等の高精度な診断が可能です</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slide 3: Doctor Profile ===== -->
+  <div class="slide bg-doctor slide-doctor" data-duration="15000">
+    <div class="slide-inner">
+      <div class="doctor-left">
+        <div class="doctor-label">DIRECTOR</div>
+        <div class="doctor-name">院長 原田 拓</div>
+        <div class="doctor-credential">日本消化器内視鏡学会 指導医・専門医</div>
+        <div class="doctor-message">
+          <span class="highlight">5万件以上</span>の内視鏡検査・治療を<br>
+          経験してまいりました。<br><br>
+          <span class="highlight">「また受けても良い」</span>と思っていただける<br>
+          内視鏡検査を心がけています。<br><br>
+          検査をご希望の方はお気軽にご相談ください。
+        </div>
+      </div>
+      <div class="doctor-right">
+        <div class="career-title">CAREER</div>
+        <ul class="career-list">
+          <li class="career-item">
+            <span class="career-year">2009〜11年</span>
+            <span class="career-desc">秋田赤十字病院 消化器病センター<br>（内視鏡国内留学）</span>
+          </li>
+          <li class="career-item">
+            <span class="career-year">2011〜13年</span>
+            <span class="career-desc">札幌医科大学<br>（大腸癌の研究で博士号取得）</span>
+          </li>
+          <li class="career-item">
+            <span class="career-year">2014〜25年</span>
+            <span class="career-desc">手稲渓仁会病院<br>消化器内科部長 / 内視鏡室室長</span>
+          </li>
+          <li class="career-item">
+            <span class="career-year">2026年〜</span>
+            <span class="career-desc">富丘まごころ内科クリニック<br>院長に就任</span>
+          </li>
+        </ul>
+        <div class="doctor-cta">検査をご希望の方はお気軽にご相談ください</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slide 4: Gastroscopy Symptoms ===== -->
+  <div class="slide bg-gastro slide-symptoms" data-duration="15000">
+    <div class="header-bar"></div>
+    <div class="slide-inner">
+      <div class="symptoms-header gastro-color">
+        <div class="icon-label">GASTROSCOPY</div>
+        <h2>胃カメラ検査をおすすめする方</h2>
+        <div class="lead">このような症状はありませんか？ 早めの検査で重大な病気のリスクを最小限に抑えられます</div>
+      </div>
+      <div class="symptoms-grid cols-2">
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          胸やけ、吐き気、腹痛がある
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          酸っぱいものがこみあげる、胃酸が上がる
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          胃が痛い、胃もたれがある
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          空腹時のみぞおちの痛みや不快感
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          お腹が張っている、食後にお腹が張る
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          喉の違和感・つかえ、げっぷが多い
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          食欲不振、急に食べられなくなった
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          便が黒っぽい
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          ピロリ菌陽性、または検査歴がない
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          健診で要再検査の結果が出た
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          40歳以上で胃カメラ未経験
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          飲酒・喫煙が多い（過去も含む）
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          消化器がんの家族歴がある
+        </div>
+        <div class="symptom-item">
+          <span class="check gastro-check">✓</span>
+          胃が荒れていると言われた
+        </div>
+      </div>
+      <div class="symptoms-footer gastro-footer">
+        一つでも該当する方は、お早めにご相談ください
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slide 5: Colonoscopy Symptoms ===== -->
+  <div class="slide bg-colon slide-symptoms" data-duration="15000">
+    <div class="header-bar"></div>
+    <div class="slide-inner">
+      <div class="symptoms-header colon-color">
+        <div class="icon-label">COLONOSCOPY</div>
+        <h2>大腸カメラ検査をおすすめする方</h2>
+        <div class="lead">以下のいずれかに該当する場合は、症状の有無にかかわらずご相談ください</div>
+      </div>
+      <div class="symptoms-grid cols-2">
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          便潜血検査が陽性だった（1回でも）
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          血便・下血がある、排便時に出血する
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          便通異常（便秘・下痢）が3週間以上続く
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          腹痛や腹部膨満感が続く
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          原因不明の体重減少がある
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          健診で貧血（鉄欠乏性貧血）を指摘された
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          過去に大腸ポリープを指摘・切除した
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          40歳以上で大腸カメラ未経験
+        </div>
+        <div class="symptom-item">
+          <span class="check colon-check">✓</span>
+          親族に大腸がん・ポリープの方がいる
+        </div>
+      </div>
+      <div class="symptoms-footer colon-footer">
+        このような症状が続く場合、大腸内視鏡検査をお受けください
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Slide 6: Access ===== -->
+  <div class="slide bg-access slide-access" data-duration="12000">
+    <div class="slide-inner">
+      <div class="access-left">
+        <div class="access-label">ACCESS / INFORMATION</div>
+        <div class="access-clinic-name">富丘まごころ内科クリニック</div>
+        <div class="access-group">KUNIMOTO MEDICAL GROUP</div>
+        <ul class="access-info-list">
+          <li class="access-info-item">
+            <div class="access-icon">&#9742;</div>
+            <div>
+              <div class="info-label">TEL</div>
+              <div class="info-value">011-699-8881</div>
+              <div class="info-sub">電話受付時間：平日 8:30〜16:45</div>
+            </div>
+          </li>
+          <li class="access-info-item">
+            <div class="access-icon">&#9873;</div>
+            <div>
+              <div class="info-label">ADDRESS</div>
+              <div class="info-value">手稲区富丘1条4丁目1-1</div>
+            </div>
+          </li>
+          <li class="access-info-item">
+            <div class="access-icon">&#128646;</div>
+            <div>
+              <div class="info-label">ACCESS</div>
+              <div class="info-value">JR稲積公園駅 南口（国道側）から徒歩7分</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="access-right">
+        <div class="map-placeholder">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2914.5!2d141.2148!3d43.1167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5omL56iy5Yy65a-M5LiY77yR5p2h77yU5LiB55uu!5e0!3m2!1sja!2sjp!4v1"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation Dots -->
+<div class="nav-dots" id="navDots"></div>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const navDotsContainer = document.getElementById('navDots');
+  const progressBar = document.getElementById('progressBar');
+  let currentIndex = 0;
+  let timer = null;
+  let progressTimer = null;
+
+  // Create navigation dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    navDotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.nav-dot');
+
+  function getDuration(index) {
+    return parseInt(slides[index].dataset.duration) || 10000;
+  }
+
+  function goToSlide(index) {
+    slides[currentIndex].classList.remove('active');
+    dots[currentIndex].classList.remove('active');
+
+    currentIndex = index;
+
+    slides[currentIndex].classList.add('active');
+    dots[currentIndex].classList.add('active');
+
+    startProgress();
+  }
+
+  function nextSlide() {
+    goToSlide((currentIndex + 1) % slides.length);
+  }
+
+  function startProgress() {
+    clearTimeout(timer);
+    cancelAnimationFrame(progressTimer);
+
+    const duration = getDuration(currentIndex);
+    const startTime = performance.now();
+
+    function updateProgress(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      progressBar.style.width = (progress * 100) + '%';
+
+      if (progress < 1) {
+        progressTimer = requestAnimationFrame(updateProgress);
+      }
+    }
+
+    progressTimer = requestAnimationFrame(updateProgress);
+    timer = setTimeout(nextSlide, duration);
+  }
+
+  // Start
+  startProgress();
+})();
+</script>
+
+</body>
+</html>
