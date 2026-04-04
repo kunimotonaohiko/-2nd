@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日越・循環型介護リーダー育成＆事業展開マスター・スケジュール</title>
+<style>
+  @page { size: landscape; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Meiryo", "Hiragino Sans", "Yu Gothic", sans-serif; background: #f5f5f5; color: #2c2c2c; }
+
+  /* Slide Container */
+  .slide {
+    width: 960px; height: 540px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 36px 44px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  /* Header bar */
+  .slide-header {
+    border-bottom: 3px solid #1a3c5e;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .slide-header .phase-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background: #1a3c5e;
+    padding: 3px 12px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .slide-header h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1a3c5e;
+    line-height: 1.3;
+  }
+  .slide-header .period {
+    font-size: 13px;
+    color: #5a7a9a;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: auto;
+  }
+
+  /* Title slide */
+  .title-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1a3c5e 0%, #2a5f8f 100%);
+    color: #fff;
+  }
+  .title-slide h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .title-slide .subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    line-height: 1.8;
+  }
+  .title-slide .logo-area {
+    margin-top: 36px;
+    font-size: 12px;
+    opacity: 0.6;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 16px;
+  }
+
+  /* Content layout */
+  .two-col { display: flex; gap: 24px; }
+  .two-col > .col { flex: 1; }
+
+  .content-block {
+    margin-bottom: 12px;
+  }
+  .content-block h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a3c5e;
+    padding: 4px 10px;
+    background: #e8eff6;
+    border-left: 4px solid #1a3c5e;
+    margin-bottom: 7px;
+  }
+  .content-block ul {
+    padding-left: 18px;
+    font-size: 11.5px;
+    line-height: 1.65;
+    color: #333;
+  }
+  .content-block li { margin-bottom: 3px; }
+  .content-block li strong { color: #1a3c5e; }
+
+  .highlight-box {
+    background: #fff8e6;
+    border: 1px solid #e0c860;
+    border-radius: 4px;
+    padding: 7px 12px;
+    font-size: 11.5px;
+    line-height: 1.6;
+    margin-top: 6px;
+  }
+  .highlight-box strong { color: #8a6d00; }
+
+  .note-box {
+    background: #f0f5fa;
+    border: 1px solid #b8cfe0;
+    border-radius: 4px;
+    padding: 7px 12px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #3a5a7a;
+    margin-top: 8px;
+  }
+
+  /* Timeline overview */
+  .timeline-row {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 6px;
+  }
+  .timeline-label {
+    width: 200px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: #1a3c5e;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px 0 0 3px;
+  }
+  .timeline-bar {
+    flex: 1;
+    background: #e8eff6;
+    padding: 6px 12px;
+    font-size: 10.5px;
+    line-height: 1.55;
+    color: #333;
+    border-radius: 0 3px 3px 0;
+    border: 1px solid #d0dde8;
+    border-left: none;
+  }
+
+  /* Footer */
+  .slide-footer {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 9px;
+    color: #aaa;
+  }
+  .slide-footer-left {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 9px;
+    color: #aaa;
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .slide { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== SLIDE 1: Title ========== -->
+<div class="slide title-slide">
+  <h1>日越・循環型介護リーダー育成<br>＆事業展開マスター・スケジュール</h1>
+  <div class="subtitle">
+    ベトナム人材の採用 → 育成 → 国家資格取得 → マネジメント → Uターン<br>
+    日本とベトナムをつなぐ持続可能な人材・資本の循環モデル
+  </div>
+  <div class="logo-area">社内限定資料｜Confidential</div>
+  <div class="slide-footer" style="color:rgba(255,255,255,0.4)">1 / 7</div>
+</div>
+
+<!-- ========== SLIDE 2: Overview Timeline ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">全体像</span>
+    <h2>マスター・スケジュール 概要</h2>
+    <span class="period">2026年6月 〜 2038年以降</span>
+  </div>
+
+  <div class="timeline-row">
+    <div class="timeline-label">Phase 1（2026.6〜7）</div>
+    <div class="timeline-bar"><strong>相互視察と基本合意</strong>｜OHF様 札幌視察 → 健康会様 ベトナム視察 → MOU締結</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">Phase 2（2026.8〜2027.3）</div>
+    <div class="timeline-bar"><strong>法人設立と公的資金申請</strong>｜日越JV設立 → 補助金申請（経産省・JICA） → カリキュラム改定</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">Phase 3（2027.4〜2028.3）</div>
+    <div class="timeline-bar"><strong>第1期生 教育・インターン</strong>｜ベトナムでの事前教育 → 札幌での有給インターン（6ヶ月）→ 帰国・卒業</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">Phase 4（2028夏〜2032頃）</div>
+    <div class="timeline-bar"><strong>本採用・国家資格取得</strong>｜育成就労/特定技能で再来日 → 実務者研修 → 介護福祉士取得</div>
+  </div>
+  <div class="timeline-row">
+    <div class="timeline-label">Phase 5（2032〜2038以降）</div>
+    <div class="timeline-bar"><strong>マネジメント育成・Uターン</strong>｜日本でのマネジメント経験 → ベトナムへ帰国 → 介護施設長・幹部教員として就任</div>
+  </div>
+
+  <div class="note-box" style="margin-top: 16px;">
+    <strong>本スケジュールのゴール：</strong>ベトナムで教育した人材を日本で育て、国家資格・マネジメント経験を積んだ後にベトナムへ還流させる。
+    日越をまたぐ<strong>「人材と資本の循環モデル」</strong>を構築し、両国の介護課題を同時に解決する。
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">2 / 7</div>
+</div>
+
+<!-- ========== SLIDE 3: Phase 1 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">Phase 1</span>
+    <h2>相互視察と基本合意</h2>
+    <span class="period">2026年6月 〜 7月</span>
+  </div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="content-block">
+        <h3>2026年6月初旬：OHF様 札幌視察</h3>
+        <ul>
+          <li>健康会様の介護施設見学、現場スタッフとの交流</li>
+          <li><strong>日本側JV</strong>の設立協議を開始
+            <ul>
+              <li>受け入れ体制の整備</li>
+              <li>生活支援・学習サポートに特化した法人を想定</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="content-block">
+        <h3>2026年7月：健康会様 ベトナム視察</h3>
+        <ul>
+          <li>OHF様の学校施設・教育カリキュラムを視察</li>
+          <li><strong>ベトナム側JV</strong>（教育・介護事業特化／税制優遇目的）の設立協議</li>
+          <li>卒業後の就労手続きを代行する<strong>「100%ベトナム内資の送り出し機関」</strong>のパートナー選定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>【重要】</strong>健康会様とOHFの学校間で<strong>「インターンシップ基本協定書（MOU）」</strong>を締結。
+    これが後続のインターンシップ（Phase 3）における在留資格申請の根拠となる。
+  </div>
+
+  <div class="note-box">
+    <strong>ポイント：</strong>この段階で日越双方の経営陣が直接現場を確認し、信頼関係を構築することが全体計画の土台となる。
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">3 / 7</div>
+</div>
+
+<!-- ========== SLIDE 4: Phase 2 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">Phase 2</span>
+    <h2>日越両国での法人設立と公的資金の申請</h2>
+    <span class="period">2026年8月 〜 2027年3月</span>
+  </div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="content-block">
+        <h3>法人設立手続き</h3>
+        <ul>
+          <li><strong>日本側JV</strong>：法人登記・銀行口座開設
+            <ul>
+              <li>受け入れ・生活支援・学習サポートに特化</li>
+            </ul>
+          </li>
+          <li><strong>ベトナム側JV</strong>：法人登記・銀行口座開設
+            <ul>
+              <li>教育・介護事業に特化（税制優遇の活用）</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>公的資金（補助金）の申請</h3>
+        <ul>
+          <li>日本政府（<strong>経産省・JICA等</strong>）への補助金・助成金の申請準備・提出</li>
+          <li>名目：ベトナムJVを<strong>「日本式介護の教育・実証拠点」</strong>として位置づけ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="content-block">
+        <h3>【法対応】インターンシップのカリキュラム改定</h3>
+        <ul>
+          <li>2027年からのインターンに向けた重要手続き</li>
+          <li>OHFの学校側で以下を完了させる：
+            <ul>
+              <li><strong>「日本の健康会での6ヶ月間の実務を正式な単位として認める」</strong></li>
+              <li>カリキュラム改定手続き</li>
+              <li>ベトナム国内での承認取得</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <strong>【注意】</strong>カリキュラム改定・承認は、Phase 3のインターン開始前に必ず完了していなければならない。スケジュール管理上の最重要タスク。
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">4 / 7</div>
+</div>
+
+<!-- ========== SLIDE 5: Phase 3 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">Phase 3</span>
+    <h2>第1期生の教育・インターンシップ</h2>
+    <span class="period">2027年4月 〜 2028年3月</span>
+  </div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="content-block">
+        <h3>2027年4月〜7月：ベトナムJVでの事前教育・ビザ申請</h3>
+        <ul>
+          <li>ベトナムJV（教育事業）にてOHFの学生向けに特化カリキュラムを提供：
+            <ul>
+              <li><strong>日本式介護技術</strong>の教育</li>
+              <li><strong>日本語</strong>の集中講座</li>
+            </ul>
+          </li>
+          <li>候補生の選抜・評価</li>
+          <li>日本の入管へ在留資格を申請：
+            <ul>
+              <li><strong>「特定活動（告示9号：インターンシップ）」</strong></li>
+              <li>提出書類：大学の単位取得証明、両社間の協定書（MOU）等</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="content-block">
+        <h3>2027年8月頃〜2028年1月頃：札幌でのインターン実施（6ヶ月間）</h3>
+        <ul>
+          <li>北海道の<strong>最低賃金以上</strong>を支給する有給インターン</li>
+          <li>健康会様の現場で実務を通じた<strong>単位取得</strong></li>
+          <li>日本側JVによる手厚いサポート：
+            <ul>
+              <li>生活支援（住居・日用品等）</li>
+              <li>メンタルヘルスケア</li>
+              <li>日本語・介護用語のフォローアップ</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="note-box">
+        <strong>インターン終了後：</strong>学生はベトナムへ帰国し、OHFの学校を卒業。優秀者はPhase 4にて本採用候補となる。
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">5 / 7</div>
+</div>
+
+<!-- ========== SLIDE 6: Phase 4 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">Phase 4</span>
+    <h2>本採用・国家資格取得フェーズ</h2>
+    <span class="period">2028年夏/秋頃 〜 2032年頃</span>
+  </div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="content-block">
+        <h3>2028年 夏/秋頃〜：本採用・再来日</h3>
+        <ul>
+          <li>卒業した優秀層を以下の在留資格で招聘：
+            <ul>
+              <li><strong>「育成就労」</strong>または<strong>「特定技能1号」</strong></li>
+            </ul>
+          </li>
+          <li>健康会様の<strong>正社員として直接雇用</strong></li>
+          <li>送り出し機関（100%ベトナム内資）が就労手続きを代行</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>就労1年目〜3年目（2028年〜2031年）</h3>
+        <ul>
+          <li>現場でのフルタイム就労</li>
+          <li>日本側JVが以下のサポートを実施：
+            <ul>
+              <li><strong>実務者研修</strong>の受講支援</li>
+              <li>介護福祉士国家試験に向けた<strong>母国語での学習サポート</strong></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="content-block">
+        <h3>就労4年目（2032年頃）：介護福祉士 取得</h3>
+        <ul>
+          <li><strong>介護福祉士（国家資格）</strong>の試験合格</li>
+          <li>在留資格を<strong>「介護」</strong>へ変更</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <strong>【在留資格「介護」のメリット】</strong><br>
+        ・在留期間の更新上限が<strong>撤廃</strong>される<br>
+        ・<strong>家族の帯同</strong>が可能になる<br>
+        ・長期的なキャリア形成の基盤が整う
+      </div>
+
+      <div class="note-box" style="margin-top: 10px;">
+        <strong>Phase 4のゴール：</strong>インターンで信頼関係を築いた人材を正社員として迎え、国家資格取得まで一貫してサポートする。「使い捨て」ではない、長期的な人材育成を実現。
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">6 / 7</div>
+</div>
+
+<!-- ========== SLIDE 7: Phase 5 ========== -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="phase-num">Phase 5</span>
+    <h2>マネジメント育成とベトナムへのUターン</h2>
+    <span class="period">2032年以降 〜</span>
+  </div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="content-block">
+        <h3>2032年〜2037年頃：日本でのマネジメント育成</h3>
+        <ul>
+          <li>介護福祉士として<strong>現場を牽引</strong></li>
+          <li>マネジメント経験の蓄積：
+            <ul>
+              <li>後輩ベトナム人材の<strong>指導・教育</strong></li>
+              <li>施設の<strong>シフト管理</strong></li>
+              <li>チームリーダーとしての運営参画</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h3>同時並行：ベトナム側JVの事業拡張準備</h3>
+        <ul>
+          <li>事業目的を<strong>「教育」→「介護施設の運営」</strong>へ拡張</li>
+          <li>ベトナム国内での介護市場調査</li>
+          <li>介護施設運営に必要なライセンスの取得</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="content-block">
+        <h3>2038年以降〜：ベトナムへのUターンと事業本格展開</h3>
+        <ul>
+          <li>成長した人材がベトナムへ帰国</li>
+          <li>ベトナム側JVが新設する介護施設の<strong>「施設長・事業責任者」</strong>として就任</li>
+          <li>またはOHFの学校の<strong>「幹部教員」</strong>として教育に還元</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <strong>【循環モデルの完成】</strong><br>
+        日越をまたぐ強固な<strong>人材と資本の循環モデル</strong>が完成。<br>
+        ・日本：介護人材不足の解消＋質の高いケアの維持<br>
+        ・ベトナム：高齢化社会への備え＋日本式介護ノウハウの移転<br>
+        ・人材：国家資格＋マネジメント経験を武器にキャリアアップ
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer-left">社内限定資料</div>
+  <div class="slide-footer">7 / 7</div>
+</div>
+
+</body>
+</html>
