@@ -1,0 +1,16 @@
+# 動作確認用 (HTTP のみ・ポート 3000 で公開)
+# 本番運用は docker-compose.prod.yml を使用してください
+services:
+  app:
+    build: .
+    container_name: meetings-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    volumes:
+      - meetings_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  meetings_data:

@@ -1,0 +1,42 @@
+# 本番用: Caddy で自動的に Let's Encrypt の HTTPS 証明書を取得
+# 起動前に DOMAIN 環境変数を .env ファイルに設定してください
+#   例: DOMAIN=meetings.kunimoto-hp.com
+services:
+  app:
+    build: .
+    container_name: meetings-app
+    expose:
+      - "3000"
+    env_file:
+      - .env.local
+    volumes:
+      - meetings_data:/app/data
+    restart: unless-stopped
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: meetings-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    networks:
+      - web
+    depends_on:
+      - app
+
+volumes:
+  meetings_data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
